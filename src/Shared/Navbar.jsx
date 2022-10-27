@@ -81,6 +81,12 @@ const Navbar = ({ dark, setDark }) => {
             </li>
             {user ? (
               <li>
+                <div
+                  className="tooltip tooltip-bottom p-0"
+                  data-tip={user.displayName}
+                >
+                  <img className="w-10 rounded-lg" src={user.photoURL} alt="" />
+                </div>
                 <div onClick={() => signOut(auth)}>Sign Out</div>
               </li>
             ) : (

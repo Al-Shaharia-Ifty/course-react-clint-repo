@@ -1,20 +1,39 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
+  useSignInWithGithub,
+  useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../Firebase.init";
+import Loading from "../Shared/Loading";
+import Social from "./Social";
 
 const Register = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, UError] = useUpdateProfile(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGithub, hUser, hLoading, hError] = useSignInWithGithub(auth);
+
   let ErrorMessage;
 
-  if (error || UError) {
+  useEffect(() => {
+    if (user || gUser || hUser) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, user, from, gUser, hUser]);
+
+  if (loading || updating || gLoading || hLoading) {
+    return <Loading />;
+  }
+
+  if (error || UError || gError || hError) {
     ErrorMessage = (
       <p className="text-red-500 mb-2">{error?.message || UError?.message}</p>
     );
@@ -32,14 +51,11 @@ const Register = () => {
     // update name and photo
     await updateProfile({ displayName, photoURL });
   };
-  if (user) {
-    // navigate("../course");
-  }
   return (
     <div>
       <div className="hero-content max-w-full p-0">
         <div className="hero min-h-screen bg-base-200">
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-10">
             <h2 className="text-3xl text-center mt-5 font-bold">Register</h2>
             <form className="card-body" onSubmit={handleSubmit}>
               <div className="form-control">
@@ -92,14 +108,6 @@ const Register = () => {
                 {ErrorMessage}
                 <label className="label">
                   <Link
-                    to="forget-password"
-                    className="label-text-alt link link-hover"
-                  >
-                    Forgot password?
-                  </Link>
-                </label>
-                <label className="label">
-                  <Link
                     to="../login"
                     className="label-text-alt link link-hover"
                   >
@@ -112,6 +120,10 @@ const Register = () => {
                 <button className="btn btn-primary">Register</button>
               </div>
             </form>
+            <Social
+              signInWithGoogle={signInWithGoogle}
+              signInWithGithub={signInWithGithub}
+            />
           </div>
         </div>
       </div>

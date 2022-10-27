@@ -1,15 +1,44 @@
-import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGithub,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../Firebase.init";
+import Loading from "../Shared/Loading";
 import Social from "./Social";
 
 const Login = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  if (user) {
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGithub, hUser, hLoading, hError] = useSignInWithGithub(auth);
+
+  useEffect(() => {
+    if (user || gUser || hUser) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, user, from, gUser, hUser]);
+
+  let ErrorMessage;
+
+  if (user || gUser || hUser) {
     navigate("../course");
+  }
+  if (loading || gLoading || hLoading) {
+    return <Loading />;
+  }
+  if (error || gError || hError) {
+    ErrorMessage = (
+      <p className="text-red-500 my-2">
+        {error?.message || gError?.message || hError?.message}
+      </p>
+    );
   }
   const handleSubmit = (e) => {
     // to stop page reload
@@ -27,7 +56,7 @@ const Login = () => {
         <div className="hero min-h-screen bg-base-200">
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <h2 className="text-3xl text-center mt-5 font-bold">Login</h2>
-            <form className="card-body" onSubmit={handleSubmit}>
+            <form className="card-body pb-0" onSubmit={handleSubmit}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -49,6 +78,7 @@ const Login = () => {
                   placeholder="********"
                   className="input input-bordered"
                 />
+                {ErrorMessage}
                 <label className="label">
                   <Link
                     to="forget-password"
@@ -71,8 +101,10 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
             </form>
-            <div className="divider">OR</div>
-            <Social />
+            <Social
+              signInWithGoogle={signInWithGoogle}
+              signInWithGithub={signInWithGithub}
+            />
           </div>
         </div>
       </div>
