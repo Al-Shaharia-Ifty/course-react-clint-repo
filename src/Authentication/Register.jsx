@@ -2,7 +2,7 @@ import React from "react";
 
 const Register = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <h2>Register</h2>
     </div>
   );
