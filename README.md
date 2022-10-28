@@ -4,12 +4,12 @@ Live project link[https://it-five.web.app/](https://it-five.web.app/).
 
 ## What is in this website
 
-\*Course Related Website
+- Course Related Website
 
-\*Firebase authentication
+- Firebase authentication
 
-\*Single page application
+- Single page application
 
-\*Light and Dark Theme
+- Light and Dark Theme
 
-\*Personal Server
+- Personal Server
