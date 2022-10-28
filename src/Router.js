@@ -8,6 +8,8 @@ import Course from "./Components/Course";
 import CourseDetails from "./Components/CourseDetails";
 import FAQ from "./Components/FAQ";
 import Main from "./Shared/Main";
+import ResetPassword from "./Authentication/ResetPassword";
+import ErrorPage from "./Shared/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,18 +19,18 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Course />,
-        loader: () => fetch("http://localhost:5000/courses"),
+        loader: () => fetch("https://server-site-seven.vercel.app/courses"),
       },
       {
         path: "course",
         element: <Course />,
-        loader: () => fetch("http://localhost:5000/courses"),
+        loader: () => fetch("https://server-site-seven.vercel.app/courses"),
       },
       {
         path: "course-details/:id",
         element: <CourseDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.id}`),
+          fetch(`https://server-site-seven.vercel.app/course/${params.id}`),
       },
       {
         path: "checkout/:id",
@@ -38,7 +40,7 @@ export const router = createBrowserRouter([
           </RequireAuth>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.id}`),
+          fetch(`https://server-site-seven.vercel.app/course/${params.id}`),
       },
       {
         path: "faq",
@@ -56,6 +58,11 @@ export const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);

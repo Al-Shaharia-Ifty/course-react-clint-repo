@@ -78,7 +78,7 @@ const Login = () => {
                 {ErrorMessage}
                 <label className="label">
                   <Link
-                    to="forget-password"
+                    to="../reset-password"
                     className="label-text-alt link link-hover"
                   >
                     Forgot password?
