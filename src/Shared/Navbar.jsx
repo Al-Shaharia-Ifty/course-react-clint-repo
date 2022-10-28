@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import auth from "../Firebase.init";
 
 const Navbar = ({ dark, setDark }) => {
@@ -33,10 +33,10 @@ const Navbar = ({ dark, setDark }) => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="course">Course</Link>
+                <NavLink to="course">Course</NavLink>
               </li>
               <li>
-                <Link to="login">Login</Link>
+                <NavLink to="login">Login</NavLink>
               </li>
             </ul>
           </div>
@@ -47,13 +47,13 @@ const Navbar = ({ dark, setDark }) => {
         <div className="navbar-end hidden md:flex">
           <ul className="menu menu-horizontal p-0">
             <li>
-              <Link to="course">Course</Link>
+              <NavLink to="course">Course</NavLink>
             </li>
             <li>
-              <Link to="faq">FAQ</Link>
+              <NavLink to="faq">FAQ</NavLink>
             </li>
             <li>
-              <Link to="blog">Blog</Link>
+              <NavLink to="blog">Blog</NavLink>
             </li>
             <li>
               <label className="swap swap-rotate py-0">
@@ -91,7 +91,7 @@ const Navbar = ({ dark, setDark }) => {
               </li>
             ) : (
               <li>
-                <Link to="login">Login</Link>
+                <NavLink to="login">Login</NavLink>
               </li>
             )}
           </ul>

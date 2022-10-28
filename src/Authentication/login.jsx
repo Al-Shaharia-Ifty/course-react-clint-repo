@@ -19,13 +19,14 @@ const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithGithub, hUser, hLoading, hError] = useSignInWithGithub(auth);
 
+  let ErrorMessage;
+
   useEffect(() => {
     if (user || gUser || hUser) {
       navigate(from, { replace: true });
     }
   }, [navigate, user, from, gUser, hUser]);
-
-  let ErrorMessage;
+  console.log(hUser);
 
   if (user || gUser || hUser) {
     navigate("../course");
