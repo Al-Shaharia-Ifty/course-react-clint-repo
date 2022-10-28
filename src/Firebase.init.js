@@ -8,9 +8,7 @@ import { getAuth } from "firebase/auth";
 //   storageBucket: process.env.REACT_APP_storageBucket,
 //   messagingSenderId: process.env.REACT_APP_messagingSenderId,
 //   appId: process.env.REACT_APP_appId,
-// };া
-
-// অনেক try করছি ভাই, কিন্তু env কাজ করেনাই।
+// };
 
 const firebaseConfig = {
   apiKey: "AIzaSyAEXOddKXptu2kJyLeGgYDSQ84IhI9QRf8",
