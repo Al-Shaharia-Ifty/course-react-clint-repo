@@ -15,11 +15,11 @@ const RequireAuth = ({ children }) => {
   if (error) {
   }
 
-  if (!user) {
+  if (user) {
+    return children;
+  } else {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
-  return children;
 };
 
 export default RequireAuth;

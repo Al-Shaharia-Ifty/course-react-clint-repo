@@ -26,11 +26,7 @@ const Login = () => {
       navigate(from, { replace: true });
     }
   }, [navigate, user, from, gUser, hUser]);
-  console.log(hUser);
 
-  if (user || gUser || hUser) {
-    navigate("../course");
-  }
   if (loading || gLoading || hLoading) {
     return <Loading />;
   }

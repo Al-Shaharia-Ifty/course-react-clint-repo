@@ -11,8 +11,8 @@ const CourseDetails = () => {
           <header className="text-xl text-red-500">{data.heading}</header>
           <h2 className="text-2xl mt-3">{data.name}</h2>
           <p className="text-lg mt-5">{data.description}</p>
-          <Link className="mt-5" to={`../../checkout/${data.id}`}>
-            <button className="btn btn-primary btn-outline">
+          <Link to={`../../checkout/${data.id}`}>
+            <button className="btn btn-primary btn-outline mt-5">
               Get Premium Access
             </button>
           </Link>

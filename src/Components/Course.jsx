@@ -9,7 +9,7 @@ const Course = () => {
         <div className="col-span-4 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-10">
           {data.map((p) => (
             <Link
-              to={`../course/${p.id}`}
+              to={`../course-details/${p.id}`}
               className="p-5 bg-base-200 rounded-lg"
               key={p.id}
             >
@@ -21,7 +21,11 @@ const Course = () => {
         </div>
         <div className="bg-base-200 mr-0 grid grid-cols-1 py-10">
           {data.map((p) => (
-            <Link className="mx-auto text-xl" to={`../course/${p.id}`}>
+            <Link
+              className="mx-auto text-xl"
+              to={`../course-details/${p.id}`}
+              key={p.id}
+            >
               {p.name}
             </Link>
           ))}
