@@ -10,6 +10,8 @@ import { getAuth } from "firebase/auth";
 //   appId: process.env.REACT_APP_appId,
 // };
 
+// অনেক try করছি ভাই, কিন্তু env কাজ করেনাই।
+
 const firebaseConfig = {
   apiKey: "AIzaSyAEXOddKXptu2kJyLeGgYDSQ84IhI9QRf8",
   authDomain: "it-five.firebaseapp.com",
